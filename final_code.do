@@ -268,8 +268,7 @@ save bio6_corr.dta,replace
 
 * merge KOSPI, VKOSPI : 2013-06-03 to 2019-06-03 
 // KOSPI
-	clear 
-	cd "/Users/daeunjung/Desktop"
+	clear
 	set more off
 	import excel "kospi13_19.xls", firstrow
 
