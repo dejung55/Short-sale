@@ -317,25 +317,25 @@ save bio6_corr.dta,replace
 /* 8. Regression */ 
 
 //gen lag DC
-	g corr1_sr_1_sr_0	=	corr_sr_1_sr_0[_n-1]
-	g corr1_sr_2_sr_0	=	corr_sr_2_sr_0[_n-1]
-	g corr1_sr_3_sr_0	=	corr_sr_3_sr_0[_n-1]
-	g corr1_sr_4_sr_0	=	corr_sr_4_sr_0[_n-1]
-	g corr1_sr_5_sr_0	=	corr_sr_5_sr_0[_n-1]
+	gen corr1_sr_1_sr_0 = corr_sr_1_sr_0[_n-1]
+	gen corr1_sr_2_sr_0 = corr_sr_2_sr_0[_n-1]
+	gen corr1_sr_3_sr_0 = corr_sr_3_sr_0[_n-1]
+	gen corr1_sr_4_sr_0 = corr_sr_4_sr_0[_n-1]
+	gen corr1_sr_5_sr_0 = corr_sr_5_sr_0[_n-1]
 			
-	g corr1_sr_2_sr_1	=	corr_sr_2_sr_1[_n-1]
-	g corr1_sr_3_sr_1	=	corr_sr_3_sr_1[_n-1]
-	g corr1_sr_4_sr_1	=	corr_sr_4_sr_1[_n-1]
-	g corr1_sr_5_sr_1	=	corr_sr_5_sr_1[_n-1]
+	gen corr1_sr_2_sr_1 = corr_sr_2_sr_1[_n-1]
+	gen corr1_sr_3_sr_1 = corr_sr_3_sr_1[_n-1]
+	gen corr1_sr_4_sr_1 = corr_sr_4_sr_1[_n-1]
+	gen corr1_sr_5_sr_1 = corr_sr_5_sr_1[_n-1]
 				
-	g corr1_sr_3_sr_2	=	corr_sr_3_sr_2[_n-1]
-	g corr1_sr_4_sr_2	=	corr_sr_4_sr_2[_n-1]
-	g corr1_sr_5_sr_2	=	corr_sr_5_sr_2[_n-1]
+	gen corr1_sr_3_sr_2 = corr_sr_3_sr_2[_n-1]
+	gen corr1_sr_4_sr_2 = corr_sr_4_sr_2[_n-1]
+	gen corr1_sr_5_sr_2 = corr_sr_5_sr_2[_n-1]
+				 
+	gen corr1_sr_4_sr_3 = corr_sr_4_sr_3[_n-1]
+	gen corr1_sr_5_sr_3 = corr_sr_5_sr_3[_n-1]
 				
-	g corr1_sr_4_sr_3	=	corr_sr_4_sr_3[_n-1]
-	g corr1_sr_5_sr_3	=	corr_sr_5_sr_3[_n-1]
-				
-	g corr1_sr_5_sr_4	=	corr_sr_5_sr_4[_n-1]
+	gen corr1_sr_5_sr_4 = corr_sr_5_sr_4[_n-1]
 
 // log diff. kospi and vkospi 
 	tsset t
@@ -347,39 +347,39 @@ save bio6_corr.dta,replace
 	gen d_vkospi = d.l_vkospi
 
 // regression : corr = lag.corr kospi vkospi			
-	reg	corr_sr_1_sr_0	corr1_sr_1_sr_0	sr_0 sr_1 Close vkospi d_Close d_vkospi
+	reg corr_sr_1_sr_0 corr1_sr_1_sr_0 sr_0 sr_1 Close vkospi d_Close d_vkospi
 	estimates store m1, title(Model 1)
-	reg	corr_sr_2_sr_0	corr1_sr_2_sr_0	sr_0 sr_2 Close vkospi d_Close d_vkospi
+	reg corr_sr_2_sr_0 corr1_sr_2_sr_0 sr_0 sr_2 Close vkospi d_Close d_vkospi
 	estimates store m2, title(Model 2)
-	reg	corr_sr_3_sr_0	corr1_sr_3_sr_0	sr_0 sr_3 Close vkospi d_Close d_vkospi 
+	reg corr_sr_3_sr_0 corr1_sr_3_sr_0 sr_0 sr_3 Close vkospi d_Close d_vkospi 
 	estimates store m3, title(Model 3)
-	reg	corr_sr_4_sr_0	corr1_sr_4_sr_0	sr_0 sr_4 Close vkospi d_Close d_vkospi
+	reg corr_sr_4_sr_0 corr1_sr_4_sr_0 sr_0 sr_4 Close vkospi d_Close d_vkospi
 	estimates store m4, title(Model 4)
-	reg	corr_sr_5_sr_0	corr1_sr_5_sr_0	sr_0 sr_5 Close vkospi d_Close d_vkospi
+	reg corr_sr_5_sr_0 corr1_sr_5_sr_0 sr_0 sr_5 Close vkospi d_Close d_vkospi
 	estimates store m5, title(Model 5)
 					
-	reg	corr_sr_2_sr_1	corr1_sr_2_sr_1	sr_1 sr_2 Close vkospi d_Close d_vkospi
+	reg corr_sr_2_sr_1  corr1_sr_2_sr_1 sr_1 sr_2 Close vkospi d_Close d_vkospi
 	estimates store m6, title(Model 6)
-	reg	corr_sr_3_sr_1	corr1_sr_3_sr_1	sr_1 sr_3 Close vkospi d_Close d_vkospi
+	reg corr_sr_3_sr_1 corr1_sr_3_sr_1 sr_1 sr_3 Close vkospi d_Close d_vkospi
 	estimates store m7, title(Model 7)
-	reg	corr_sr_4_sr_1	corr1_sr_4_sr_1	sr_1 sr_4 Close vkospi d_Close d_vkospi
+	reg corr_sr_4_sr_1 corr1_sr_4_sr_1 sr_1 sr_4 Close vkospi d_Close d_vkospi
 	estimates store m8, title(Model 8)
-	reg	corr_sr_5_sr_1	corr1_sr_5_sr_1	sr_1 sr_5 Close vkospi d_Close d_vkospi
+	reg corr_sr_5_sr_1 corr1_sr_5_sr_1 sr_1 sr_5 Close vkospi d_Close d_vkospi
 	estimates store m9, title(Model 9)
 		
-	reg	corr_sr_3_sr_2	corr1_sr_3_sr_2	sr_2 sr_3 Close vkospi d_Close d_vkospi
+	reg corr_sr_3_sr_2 corr1_sr_3_sr_2 sr_2 sr_3 Close vkospi d_Close d_vkospi
 	estimates store m10, title(Model 10)
-	reg	corr_sr_4_sr_2	corr1_sr_4_sr_2	sr_2 sr_4 Close vkospi d_Close d_vkospi
+	reg corr_sr_4_sr_2 corr1_sr_4_sr_2 sr_2 sr_4 Close vkospi d_Close d_vkospi
 	estimates store m11, title(Model 11)
-	reg	corr_sr_5_sr_2	corr1_sr_5_sr_2	sr_2 sr_5 Close vkospi d_Close d_vkospi
+	reg corr_sr_5_sr_2 corr1_sr_5_sr_2 sr_2 sr_5 Close vkospi d_Close d_vkospi
 	estimates store m12, title(Model 12)
 					
-	reg	corr_sr_4_sr_3	corr1_sr_4_sr_3	sr_3 sr_4 Close vkospi d_Close d_vkospi
+	reg corr_sr_4_sr_3 corr1_sr_4_sr_3 sr_3 sr_4 Close vkospi d_Close d_vkospi
 	estimates store m13, title(Model 13)
-	reg	corr_sr_5_sr_3	corr1_sr_5_sr_3	sr_3 sr_5 Close vkospi d_Close d_vkospi
+	reg corr_sr_5_sr_3 corr1_sr_5_sr_3 sr_3 sr_5 Close vkospi d_Close d_vkospi
 	estimates store m14, title(Model 14)
 					
-	reg	corr_sr_5_sr_4	corr1_sr_5_sr_4	sr_4 sr_5 Close vkospi d_Close d_vkospi
+	reg corr_sr_5_sr_4 corr1_sr_5_sr_4 sr_4 sr_5 Close vkospi d_Close d_vkospi
 	estimates store m15, title(Model 15)
 
 	estout m1 m2 m3 m4 m5 ,cells(b(star fmt(3)) se(par fmt(2)))
