@@ -48,7 +48,7 @@ cd "../dta"
 * corr
 	pwcorr sr sr_1 sr_2 sr_3 sr_4 sr_5, sig star(.01) 
 
-/* 2. Unit root. Cointrgraion test */
+/* 3. Unit root. Cointrgraion test */
 * Unit root 
 	forv i=0/5{
 		dfuller sr_`i', constant	
@@ -65,7 +65,7 @@ cd "../dta"
 	vecrank sr_0 sr_1 sr_2 sr_3 sr_4 sr_5, lags(1) t(none)
 	vecrank sr_0 sr_1 sr_2 sr_3 sr_4 sr_5, lags(1) t(trend) //no cointegration
 
-/* tsline Graph */
+/* 4. tsline Graph */
 * Graph : SR
 	rename daily Date
 	tsset Date
@@ -84,7 +84,7 @@ cd "../dta"
 		drop monthyear
 	 */
 
-/* VAR-DCC-MGARCH */
+/* 5. VAR-DCC-MGARCH */
 * 1. DCC-MGARCH : SR, 2013-06-03 to 2019-06-03, VAR(1)
 	tsset t
 	mgarch dcc (sr_0 sr_1 sr_2 sr_3 sr_4 sr_5 = L.sr_0 L.sr_1 L.sr_2 L.sr_3 L.sr_4 L.sr_5), arch(1) garch(1)
@@ -108,7 +108,7 @@ cd "../dta"
 	mgarch dcc (d_sr_0 d_sr_1 d_sr_2 d_sr_3 d_sr_4 d_sr_5 = L.d_sr_0 L.d_sr_1 L.d_sr_2 L.d_sr_3 L.d_sr_4 L.d_sr_5), arch(1) garch(1)
 
 
-/* Conditional Correlation */
+/* 6. Conditional Correlation */
 * 1. conditional variance & covariance, residuals
 	predict H*, variance 
 	predict R*, residuals
@@ -121,7 +121,7 @@ cd "../dta"
 		gen SDR_sr_`i' = R_sr_`i'/(sqrt(H_sr_`i'_sr_`i'))
 	}
 
-/* gen SDR_sr = R_sr/(sqrt(H_sr_sr))
+     /* gen SDR_sr = R_sr/(sqrt(H_sr_sr))
 	gen SDR_sr_1 = R_sr_1/(sqrt(H_sr_1_sr_1))
 	gen SDR_sr_2 = R_sr_2/(sqrt(H_sr_2_sr_2))
 	gen SDR_sr_3 = R_sr_3/(sqrt(H_sr_3_sr_3))
@@ -184,7 +184,7 @@ cd "../dta"
 
 	save bio6_corr.dta,replace
 	save ar_corr.dta,replace
-/* Conditional correlation graph */
+/* 7. Conditional correlation graph */
 
 ** 1. conditional variance (GARCH), Graph1
 	tsset Date
@@ -283,7 +283,7 @@ cd "../dta"
 	qui tsline corr_sr_5_sr_4, name(cor45, replace) */
 
 
-/*  ------- merge BIO + KOSPI + VKOSPI  ------- (by the Stata editor for macOS (piu_sign) )  */ 
+/*  8. merge BIO + KOSPI + VKOSPI  */ 
 
 ** merge KOSPI, VKOSPI : 2013-06-03 to 2019-06-03 
 // KOSPI
@@ -349,28 +349,28 @@ cd "../dta"
 	save ar_bio6_merge.dta,replace
 
 
-/*  ------- Regression ------- (by the Stata editor for macOS (piu_sign) )  */ 
+/* 9. Regression */ 
 
 //gen lag DC
-	g corr1_sr_1_sr_0	=	corr_sr_1_sr_0[_n-1]
-	g corr1_sr_2_sr_0	=	corr_sr_2_sr_0[_n-1]
-	g corr1_sr_3_sr_0	=	corr_sr_3_sr_0[_n-1]
-	g corr1_sr_4_sr_0	=	corr_sr_4_sr_0[_n-1]
-	g corr1_sr_5_sr_0	=	corr_sr_5_sr_0[_n-1]
-
-	g corr1_sr_2_sr_1	=	corr_sr_2_sr_1[_n-1]
-	g corr1_sr_3_sr_1	=	corr_sr_3_sr_1[_n-1]
-	g corr1_sr_4_sr_1	=	corr_sr_4_sr_1[_n-1]
-	g corr1_sr_5_sr_1	=	corr_sr_5_sr_1[_n-1]
-
-	g corr1_sr_3_sr_2	=	corr_sr_3_sr_2[_n-1]
-	g corr1_sr_4_sr_2	=	corr_sr_4_sr_2[_n-1]
-	g corr1_sr_5_sr_2	=	corr_sr_5_sr_2[_n-1]
-
-	g corr1_sr_4_sr_3	=	corr_sr_4_sr_3[_n-1]
-	g corr1_sr_5_sr_3	=	corr_sr_5_sr_3[_n-1]
-
-	g corr1_sr_5_sr_4	=	corr_sr_5_sr_4[_n-1]
+	gen corr1_sr_1_sr_0 = corr_sr_1_sr_0[_n-1]
+	gen corr1_sr_2_sr_0 = corr_sr_2_sr_0[_n-1]
+	gen corr1_sr_3_sr_0 = corr_sr_3_sr_0[_n-1]
+	gen corr1_sr_4_sr_0 = corr_sr_4_sr_0[_n-1]
+	gen corr1_sr_5_sr_0 = corr_sr_5_sr_0[_n-1]
+			
+	gen corr1_sr_2_sr_1 = corr_sr_2_sr_1[_n-1]
+	gen corr1_sr_3_sr_1 = corr_sr_3_sr_1[_n-1]
+	gen corr1_sr_4_sr_1 = corr_sr_4_sr_1[_n-1]
+	gen corr1_sr_5_sr_1 = corr_sr_5_sr_1[_n-1]
+				
+	gen corr1_sr_3_sr_2 = corr_sr_3_sr_2[_n-1]
+	gen corr1_sr_4_sr_2 = corr_sr_4_sr_2[_n-1]
+	gen corr1_sr_5_sr_2 = corr_sr_5_sr_2[_n-1]
+				 
+	gen corr1_sr_4_sr_3 = corr_sr_4_sr_3[_n-1]
+	gen corr1_sr_5_sr_3 = corr_sr_5_sr_3[_n-1]
+				
+	gen corr1_sr_5_sr_4 = corr_sr_5_sr_4[_n-1]
 
 // log diff. kospi and vkospi 
 	tsset t
@@ -382,39 +382,39 @@ cd "../dta"
 	gen d_vkospi = d.l_vkospi
 
 // regression : corr = lag.corr kospi vkospi			
-	reg	corr_sr_1_sr_0	corr1_sr_1_sr_0	sr_0 sr_1 Close vkospi d_Close d_vkospi
+	reg corr_sr_1_sr_0 corr1_sr_1_sr_0 sr_0 sr_1 Close vkospi d_Close d_vkospi
 	estimates store m1, title(Model 1)
-	reg	corr_sr_2_sr_0	corr1_sr_2_sr_0	sr_0 sr_2 Close vkospi d_Close d_vkospi
+	reg corr_sr_2_sr_0 corr1_sr_2_sr_0 sr_0 sr_2 Close vkospi d_Close d_vkospi
 	estimates store m2, title(Model 2)
-	reg	corr_sr_3_sr_0	corr1_sr_3_sr_0	sr_0 sr_3 Close vkospi d_Close d_vkospi 
+	reg corr_sr_3_sr_0 corr1_sr_3_sr_0 sr_0 sr_3 Close vkospi d_Close d_vkospi 
 	estimates store m3, title(Model 3)
-	reg	corr_sr_4_sr_0	corr1_sr_4_sr_0	sr_0 sr_4 Close vkospi d_Close d_vkospi
+	reg corr_sr_4_sr_0 corr1_sr_4_sr_0 sr_0 sr_4 Close vkospi d_Close d_vkospi
 	estimates store m4, title(Model 4)
-	reg	corr_sr_5_sr_0	corr1_sr_5_sr_0	sr_0 sr_5 Close vkospi d_Close d_vkospi
+	reg corr_sr_5_sr_0 corr1_sr_5_sr_0 sr_0 sr_5 Close vkospi d_Close d_vkospi
 	estimates store m5, title(Model 5)
-
-	reg	corr_sr_2_sr_1	corr1_sr_2_sr_1	sr_1 sr_2 Close vkospi d_Close d_vkospi
+					
+	reg corr_sr_2_sr_1  corr1_sr_2_sr_1 sr_1 sr_2 Close vkospi d_Close d_vkospi
 	estimates store m6, title(Model 6)
-	reg	corr_sr_3_sr_1	corr1_sr_3_sr_1	sr_1 sr_3 Close vkospi d_Close d_vkospi
+	reg corr_sr_3_sr_1 corr1_sr_3_sr_1 sr_1 sr_3 Close vkospi d_Close d_vkospi
 	estimates store m7, title(Model 7)
-	reg	corr_sr_4_sr_1	corr1_sr_4_sr_1	sr_1 sr_4 Close vkospi d_Close d_vkospi
+	reg corr_sr_4_sr_1 corr1_sr_4_sr_1 sr_1 sr_4 Close vkospi d_Close d_vkospi
 	estimates store m8, title(Model 8)
-	reg	corr_sr_5_sr_1	corr1_sr_5_sr_1	sr_1 sr_5 Close vkospi d_Close d_vkospi
+	reg corr_sr_5_sr_1 corr1_sr_5_sr_1 sr_1 sr_5 Close vkospi d_Close d_vkospi
 	estimates store m9, title(Model 9)
-
-	reg	corr_sr_3_sr_2	corr1_sr_3_sr_2	sr_2 sr_3 Close vkospi d_Close d_vkospi
+		
+	reg corr_sr_3_sr_2 corr1_sr_3_sr_2 sr_2 sr_3 Close vkospi d_Close d_vkospi
 	estimates store m10, title(Model 10)
-	reg	corr_sr_4_sr_2	corr1_sr_4_sr_2	sr_2 sr_4 Close vkospi d_Close d_vkospi
+	reg corr_sr_4_sr_2 corr1_sr_4_sr_2 sr_2 sr_4 Close vkospi d_Close d_vkospi
 	estimates store m11, title(Model 11)
-	reg	corr_sr_5_sr_2	corr1_sr_5_sr_2	sr_2 sr_5 Close vkospi d_Close d_vkospi
+	reg corr_sr_5_sr_2 corr1_sr_5_sr_2 sr_2 sr_5 Close vkospi d_Close d_vkospi
 	estimates store m12, title(Model 12)
-
-	reg	corr_sr_4_sr_3	corr1_sr_4_sr_3	sr_3 sr_4 Close vkospi d_Close d_vkospi
+					
+	reg corr_sr_4_sr_3 corr1_sr_4_sr_3 sr_3 sr_4 Close vkospi d_Close d_vkospi
 	estimates store m13, title(Model 13)
-	reg	corr_sr_5_sr_3	corr1_sr_5_sr_3	sr_3 sr_5 Close vkospi d_Close d_vkospi
+	reg corr_sr_5_sr_3 corr1_sr_5_sr_3 sr_3 sr_5 Close vkospi d_Close d_vkospi
 	estimates store m14, title(Model 14)
-
-	reg	corr_sr_5_sr_4	corr1_sr_5_sr_4	sr_4 sr_5 Close vkospi d_Close d_vkospi
+					
+	reg corr_sr_5_sr_4 corr1_sr_5_sr_4 sr_4 sr_5 Close vkospi d_Close d_vkospi
 	estimates store m15, title(Model 15)
 
 	estout m1 m2 m3 m4 m5 ,cells(b(star fmt(3)) se(par fmt(2)))
@@ -422,15 +422,11 @@ cd "../dta"
 	estout m11 m12 m13 m14 m15 ,cells(b(star fmt(3)) se(par fmt(2)))
 
 
-/*  ------- VAR ------- (by the Stata editor for macOS (piu_sign) )  */ 
+/* 10. VAR */ 
+
+// optimal lags
 	varsoc sr_0 sr_1 sr_2 sr_3 sr_4 sr_5 
-
+// Vector Autoregressive
 	var sr_*, lags(4) lut
-
+// vargranger
 	vargranger
-
-
-
-
-
-
