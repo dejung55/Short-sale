@@ -46,7 +46,7 @@ cd "../dta"
 		}
 
 * corr
-	pwcorr sr sr_1 sr_2 sr_3 sr_4 sr_5, sig star(.01) 
+	pwcorr sr_0 sr_1 sr_2 sr_3 sr_4 sr_5, sig star(.01) 
 
 /* 3. Unit root. Cointrgraion test */
 * Unit root 
@@ -84,18 +84,18 @@ cd "../dta"
 		drop monthyear
 	 */
 
-/* 5. VAR-DCC-MGARCH */
-* 1. DCC-MGARCH : SR, 2013-06-03 to 2019-06-03, VAR(1)
+/* 5. DCC-MGARCH */
+* 1. VAR(1)-DCC-MGARCH : SR, 2013-06-03 to 2019-06-03, VAR(1)
 	tsset t
 	mgarch dcc (sr_0 sr_1 sr_2 sr_3 sr_4 sr_5 = L.sr_0 L.sr_1 L.sr_2 L.sr_3 L.sr_4 L.sr_5), arch(1) garch(1)
 
 	estat summarize
 	estimates
 
-* 2. DCC-MGARCH : SR, 2013-06-03 to 2019-06-03, AR(1)
+* 2. AR(1)-DCC-MGARCH : SR, 2013-06-03 to 2019-06-03, AR(1)
 	mgarch dcc (sr_0 = L.sr_0)(sr_1 = L.sr_1) (sr_2 = L.sr_2) (sr_3 = L.sr_3) (sr_4 = L.sr_4) (sr_5 = L.sr_5), arch(1) garch(1)
 
-* log difference and graph 
+* 3. log difference and graph, VAR(1)-DCC-MGARCH : d_SR
 	forv i=0/5 {
 	  	gen l_sr_`i' = log(sr_`i')
 		gen d_sr_`i' = d.sr_`i'
