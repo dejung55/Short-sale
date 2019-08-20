@@ -8,7 +8,6 @@ main findings from DCC-MGARCH model
 
 <img src="https://user-images.githubusercontent.com/51472378/63322830-5365ca00-c35f-11e9-958f-f2b32335d7a9.png" width="90%"></img>
 
-<img src="https://user-images.githubusercontent.com/23310187/34244435-91eab306-e668-11e7-8063-735dff683bf8.png" width="90%"></img>
 
 <img src="https://user-images.githubusercontent.com/51472378/63322841-55c82400-c35f-11e9-81aa-1e7e9ca728b0.png" width="90%"></img>
 
