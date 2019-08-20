@@ -14,6 +14,7 @@ main findings from DCC-MGARCH model
 
 <img src="https://user-images.githubusercontent.com/51472378/63322844-58c31480-c35f-11e9-9eea-6e04619fa1d8.png" width="60%"></img>
 
+- Granger casaulity 
 <img src="https://user-images.githubusercontent.com/51472378/63322805-3f21cd00-c35f-11e9-9c9d-5610ba4b0cdc.png" width="60%"></img>
 
 
