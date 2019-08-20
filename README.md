@@ -1,4 +1,4 @@
-# Time series analysis using the finanacial data
+# Time series analysis using a finanacial data
 
 <strong>Main findings from DCC-MGARCH model</strong>
 <hr>
