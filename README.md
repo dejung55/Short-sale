@@ -1,4 +1,4 @@
-# Time series analysis of short-selling activity 
+# Time series analysis using the finanacial data
 
 <strong>Main findings from DCC-MGARCH model</strong>
 <hr>
