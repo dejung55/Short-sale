@@ -1,7 +1,7 @@
 # Time series analysis for finanacial data
 
 <strong>Main findings from DCC-MGARCH model</strong>
-<hr>
+
 1. Short ratios from the six pharmaceutical firms
 <img src="https://user-images.githubusercontent.com/51472378/63322818-4943cb80-c35f-11e9-95d4-4c53f1a801e9.png" width="60%"></img><br>
 2. Conditional variance 
