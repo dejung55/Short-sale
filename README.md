@@ -4,7 +4,7 @@
 
 1. Short ratios from the six pharmaceutical firms
 <img src="https://user-images.githubusercontent.com/51472378/63322818-4943cb80-c35f-11e9-95d4-4c53f1a801e9.png" width="60%"></img><br>
-2. Conditional variance 
+2. Conditional variance <br>
 <img src="https://user-images.githubusercontent.com/51472378/63322826-4fd24300-c35f-11e9-9b18-9fa3ea60372e.png" width="60%"></img>
 <hr>
 3. Dynamic Conditional Correlation Multivariate GARCH
